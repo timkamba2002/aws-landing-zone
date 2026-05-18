@@ -13,7 +13,7 @@ The purpose of this project is to build a modular, reusable AWS Landing Zone usi
 **This project demonstrates:**
 - ✅ Infrastructure-as-Code (IaC) best practices
 - ✅ Modular Terraform design with reusable components
-- ✅ Multi-environment structure (dev, prod, staging, etc.)
+- ✅ Multi-environment structure (dev, staging, prod, etc.)
 - ✅ Secure networking patterns with public/private subnets
 - ✅ Load balancing and auto-scaling compute provisioning
 - ✅ Real-world cloud engineering workflows
@@ -137,7 +137,7 @@ A landing zone provides:
 │  │  │         │   Auto Scaling Group (ASG)          │     │  │  │
 │  │  │         │   Min: 2 | Desired: 2 | Max: 4     │     │  │  │
 │  │  │         │   Health Check: ELB                 │     │  │  │
-│  │  │         └──────────────────────────────────────┘     │  │  │
+│  │  │         └──���───────────────────────────────────┘     │  │  │
 │  │  │                                                        │  │  │
 │  │  └────────────────────────────────────────────────────────┘  │  │
 │  │                                                                  │  │
@@ -222,18 +222,11 @@ aws-landing-zone/
 │       └── outputs.tf                 # Output values
 │
 └── environments/
-    ├── dev/
-    │   ├── main.tf                    # Wire all modules for dev
-    │   ├── backend.tf                 # S3 backend config
-    │   ├── variables.tf               # Environment variables
-    │   ├── terraform.tfvars           # Dev-specific values
-    │   └── user_data.sh               # EC2 initialization script
-    │
-    └── prod/
-        ├── main.tf                    # Wire all modules for prod
+    └── dev/
+        ├── main.tf                    # Wire all modules for dev
         ├── backend.tf                 # S3 backend config
         ├── variables.tf               # Environment variables
-        ├── terraform.tfvars           # Prod-specific values
+        ├── terraform.tfvars           # Dev-specific values
         └── user_data.sh               # EC2 initialization script
 ```
 
@@ -333,8 +326,8 @@ Provisions remote state management infrastructure:
 
 ---
 
-### **7. Environment Layer** (`environments/dev`, `environments/prod`)
-The `main.tf` in each environment wires all modules together:
+### **7. Environment Layer** (`environments/dev`)
+The `main.tf` in the dev environment wires all modules together:
 - Instantiates all six modules
 - Passes outputs from one module as inputs to another
 - Applies environment-specific variables
@@ -687,6 +680,5 @@ For issues, questions, or suggestions:
 
 ---
 
-**Last Updated:** May 16, 2026  
+**Last Updated:** May 17, 2026  
 **Status:** ✅ Production Ready
-
